@@ -18,29 +18,28 @@ ARG USER_GID=$USER_UID
 
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
-    # Install common packages, non-root user
+    # Install common packages, non-root user and install nvm
     && bash /tmp/scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true"
 
-# Setup default tools
-# ENV NPM_GLOBAL=/usr/local/share/npm-global
-# ENV PATH=${NPM_GLOBAL}/bin:${PATH}
+# Setup default nodejs tools
+ENV NPM_GLOBAL=/usr/local/share/npm-global
+ENV PATH=${NPM_GLOBAL}/bin:${PATH}
 
-RUN bash /tmp/scripts/elixir-debian.sh "${USERNAME}"
-    # \
+RUN bash /tmp/scripts/elixir-debian.sh "${USERNAME}" \
     # Configure global npm install location, use group to adapt to UID/GID changes
-    # && if ! cat /etc/group | grep -e "^npm:" > /dev/null 2>&1; then groupadd -r npm; fi \
-    # && usermod -a -G npm ${USERNAME} \
-    # && umask 0002 \
-    # && mkdir -p ${NPM_GLOBAL} \
-    # && touch /usr/local/etc/npmrc \
-    # && chown ${USERNAME}:npm ${NPM_GLOBAL} /usr/local/etc/npmrc \
-    # && chmod g+s ${NPM_GLOBAL} \
-    # && npm config -g set prefix ${NPM_GLOBAL} \
-    # && sudo -u ${USERNAME} npm config -g set prefix ${NPM_GLOBAL}
+    && if ! cat /etc/group | grep -e "^npm:" > /dev/null 2>&1; then groupadd -r npm; fi \
+    && usermod -a -G npm ${USERNAME} \
+    && umask 0002 \
+    && mkdir -p ${NPM_GLOBAL} \
+    && touch /usr/local/etc/npmrc \
+    && chown ${USERNAME}:npm ${NPM_GLOBAL} /usr/local/etc/npmrc \
+    && chmod g+s ${NPM_GLOBAL} \
+    && npm config -g set prefix ${NPM_GLOBAL} \
+    && sudo -u ${USERNAME} npm config -g set prefix ${NPM_GLOBAL}
 
 # Install eslint
-# RUN su ${USERNAME} -c "umask 0002 && npm install -g eslint" \
-#     && npm cache clean --force > /dev/null 2>&1
+RUN su ${USERNAME} -c "umask 0002 && npm install -g eslint" \
+    && npm cache clean --force > /dev/null 2>&1
 
 # [Optional] Uncomment this section to install additional OS packages.
 # RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \

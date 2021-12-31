@@ -74,44 +74,45 @@ apt_get_update_if_needed()
 # Run install apt-utils to avoid debconf warning then verify presence of other common developer tools and dependencies
 if [ "${PACKAGES_ALREADY_INSTALLED}" != "true" ]; then
 
-    package_list="apt-utils \
-        openssh-client \
-        gnupg2 \
-        iproute2 \
-        procps \
-        lsof \
-        htop \
-        net-tools \
-        psmisc \
-        curl \
-        wget \
-        rsync \
+    package_list="apt-transport-https \
+        apt-utils \
         ca-certificates \
-        unzip \
-        zip \
-        nano \
-        vim-tiny \
-        less \
-        jq \
-        lsb-release \
-        apt-transport-https \
+        curl \
         dialog \
+        gnupg2 \
+        htop \
+        init-system-helpers \
+        inotify-tools \
+        iproute2 \
+        jq \
+        less \
         libc6 \
         libgcc1 \
-        libkrb5-3 \
         libgssapi-krb5-2 \
         libicu[0-9][0-9] \
+        libkrb5-3 \
         liblttng-ust0 \
         libstdc++6 \
-        zlib1g \
         locales \
-        sudo \
-        ncdu \
+        lsb-release \
+        lsof \
         man-db \
-        strace \
         manpages \
         manpages-dev \
-        init-system-helpers"
+        nano \
+        ncdu \
+        net-tools \
+        openssh-client \
+        procps \
+        psmisc \
+        rsync \
+        strace \
+        sudo \
+        unzip \
+        vim-tiny \
+        wget \
+        zip \
+        zlib1g"
 
     # Needed for adding manpages-posix and manpages-posix-dev which are non-free packages in Debian
     if [ "${ADD_NON_FREE_PACKAGES}" = "true" ]; then

@@ -47,8 +47,6 @@ services:
       POSTGRES_PASSWORD: password
     image: postgres
     network_mode: host
-    # ports:
-    #   - 5432:5432
     restart: unless-stopped
     volumes:
       - pgdb-data:/var/lib/postgresql/data
@@ -56,8 +54,6 @@ services:
   adminer:
     image: adminer
     network_mode: host
-    # ports:
-    #   - 8080:8080
     restart: unless-stopped
 
 volumes:

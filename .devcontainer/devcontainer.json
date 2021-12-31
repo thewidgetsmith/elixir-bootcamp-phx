@@ -12,23 +12,24 @@
 
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     "forwardPorts": [
-      3000,
+      4000,
+      4001,
       5432,
-      8080
+      // 8080
     ],
 
     // Use 'portsAttributes' to set default properties for specific forwarded ports. More info: https://code.visualstudio.com/docs/remote/devcontainerjson-reference.
     "portsAttributes": {
-      "3000": {
+      "4000": {
         "label": "HTTP",
         "onAutoForward": "notify"
       },
       "5432": {
         "label": "PostgreSQL"
       },
-      "8080": {
-        "label": "Adminer"
-      }
+      // "8080": {
+      //   "label": "Adminer"
+      // }
     },
 
     // Use 'otherPortsAttributes' to configure any ports that aren't configured using 'portsAttributes'.
@@ -37,7 +38,7 @@
     // },
 
     // Use 'postCreateCommand' to run commands after the container is created.
-    // "postCreateCommand": "npm install",
+    // "postCreateCommand": "mix deps.get",
 
     // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
     "remoteUser": "vscode",
@@ -49,6 +50,8 @@
       "formulahendry.code-runner",
       "jakebecker.elixir-ls",
       "mechatroner.rainbow-csv",
+      "mtxr.sqltools",
+		  "mtxr.sqltools-driver-pg",
       "naumovs.color-highlight",
       "sleistner.vscode-fileutils",
       "streetsidesoftware.code-spell-checker",
@@ -57,6 +60,16 @@
 
     // Set *default* container specific settings.json values on container create.
     "settings": {
+      "sqltools.connections": [{
+        "name": "Container database",
+        "driver": "PostgreSQL",
+        "previewLimit": 50,
+        "server": "localhost",
+        "port": 5432,
+        "database": "postgres",
+        "username": "postgres",
+        "password": "password"
+      }],
       "terminal.integrated.defaultProfile.linux": "zsh"
     }
   }

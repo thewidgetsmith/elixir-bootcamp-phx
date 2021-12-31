@@ -23,6 +23,9 @@ services:
         UPGRADE_PACKAGES: 'true'
         VARIANT: 1.13-slim
 
+        PHOENIX_VERSION: 1.6.5
+        NODE_VERSION: 16
+
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
 
@@ -44,21 +47,19 @@ services:
 
   postgres:
     environment:
+      POSTGRES_DB: app
       POSTGRES_PASSWORD: password
+      POSTGRES_USER: postgres
     image: postgres
     network_mode: host
-    # ports:
-    #   - 5432:5432
     restart: unless-stopped
     volumes:
       - pgdb-data:/var/lib/postgresql/data
 
-  adminer:
-    image: adminer
-    network_mode: host
-    # ports:
-    #   - 8080:8080
-    restart: unless-stopped
+  # adminer:
+  #   image: adminer
+  #   network_mode: host
+  #   restart: unless-stopped
 
 volumes:
   pgdb-data:

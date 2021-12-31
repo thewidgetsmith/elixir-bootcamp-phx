@@ -1,6 +1,6 @@
-defmodule Workspace do
+defmodule Launchpad do
   @moduledoc """
-  Documentation for `Workspace`.
+  Documentation for `Launchpad`.
   """
 
   @doc """
@@ -8,7 +8,7 @@ defmodule Workspace do
 
   ## Examples
 
-      iex> Workspace.hello()
+      iex> Launchpad.hello()
       :world
 
   """

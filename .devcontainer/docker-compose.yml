@@ -21,7 +21,7 @@ services:
       args:
         INSTALL_ZSH: 'true'
         UPGRADE_PACKAGES: 'true'
-        VARIANT: 1.12-slim
+        VARIANT: 1.13-slim
 
     # Overrides default command so things don't shut down after the process ends.
     command: sleep infinity
@@ -47,8 +47,8 @@ services:
       POSTGRES_PASSWORD: password
     image: postgres
     network_mode: host
-    ports:
-      - 5432:5432
+    # ports:
+    #   - 5432:5432
     restart: unless-stopped
     volumes:
       - pgdb-data:/var/lib/postgresql/data
@@ -56,8 +56,8 @@ services:
   adminer:
     image: adminer
     network_mode: host
-    ports:
-      - 8080:8080
+    # ports:
+    #   - 8080:8080
     restart: unless-stopped
 
 volumes:

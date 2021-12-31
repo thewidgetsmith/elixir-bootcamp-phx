@@ -8,9 +8,8 @@
 
     // Array of Docker CLI arguments for the development container.
     //  `--env-file` specifies a file of environment variables
-    // "runArgs": ["--env-file", ".env.local"],
+    "runArgs": ["--env-file", ".env.local"],
 
-    // Add the IDs of extensions you want installed when the container is created.
     // Use 'forwardPorts' to make a list of ports inside the container available locally.
     "forwardPorts": [
       3000,
@@ -21,7 +20,7 @@
     // Use 'portsAttributes' to set default properties for specific forwarded ports. More info: https://code.visualstudio.com/docs/remote/devcontainerjson-reference.
     "portsAttributes": {
       "3000": {
-        "label": "HTTP APP",
+        "label": "HTTP",
         "onAutoForward": "notify"
       },
       "5432": {
@@ -34,7 +33,7 @@
 
     // Use 'otherPortsAttributes' to configure any ports that aren't configured using 'portsAttributes'.
     // "otherPortsAttributes": {
-    // 		"onAutoForward": "silent"
+    //   "onAutoForward": "silent"
     // },
 
     // Use 'postCreateCommand' to run commands after the container is created.
@@ -48,7 +47,12 @@
       "eamodio.gitlens",
       "EditorConfig.EditorConfig",
       "formulahendry.code-runner",
-      "jakebecker.elixir-ls"
+      "jakebecker.elixir-ls",
+      "mechatroner.rainbow-csv",
+      "naumovs.color-highlight",
+      "sleistner.vscode-fileutils",
+      "streetsidesoftware.code-spell-checker",
+      "yzhang.markdown-all-in-one"
     ],
 
     // Set *default* container specific settings.json values on container create.

@@ -1,1 +1,1 @@
-FROM elixir:1.12-slim
+FROM elixir:1.13-slim

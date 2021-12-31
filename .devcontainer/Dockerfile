@@ -1,5 +1,5 @@
 # [Choice] Elixir Version: 1.12
-ARG VARIANT="1.12-slim"
+ARG VARIANT="1.13-slim"
 FROM elixir:${VARIANT}
 
 # Copy scripts to execute
@@ -11,17 +11,17 @@ ARG INSTALL_ZSH="true"
 # [Option] Upgrade OS packages to their latest versions
 ARG UPGRADE_PACKAGES="true"
 
-# Install needed packages, nvm and setup non-root user. Use a separate RUN statement to add your own dependencies.
+# Install needed packages and setup non-root user. Use a separate RUN statement to add your own dependencies.
 ARG USERNAME=vscode
 ARG USER_UID=1000
 ARG USER_GID=$USER_UID
 
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
-    # Install common packages, non-root user and install nvm
+    # Install common packages, non-root user
     && bash /tmp/scripts/common-debian.sh "${INSTALL_ZSH}" "${USERNAME}" "${USER_UID}" "${USER_GID}" "${UPGRADE_PACKAGES}" "true" "true"
 
-# Setup default nodejs tools
+# Setup default tools
 # ENV NPM_GLOBAL=/usr/local/share/npm-global
 # ENV PATH=${NPM_GLOBAL}/bin:${PATH}
 
